@@ -11,7 +11,7 @@ const BASE_URL = "https://gateway.marvel.com/v1/public/characters";
 
 const MarvelCharacterFetcher: React.FC = () => {
   // eslint-disable-next-line
-  const [characters, setCharacters] = useState<MarvelCharacter[]>([]);
+  // const [characters, setCharacters] = useState<MarvelCharacter[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>(""); // 検索ワードの状態
   // const [randomCharacter, setRandomCharacter] = useState<MarvelCharacter[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
