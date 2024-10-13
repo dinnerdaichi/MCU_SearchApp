@@ -58,7 +58,6 @@ const MovieFetcher: React.FC<MovieFecherProps> = ({ characterName }) => {
             <MovieCard
               key={movie.id}
               movie={movie}
-              cover_url={movie.cover_url}
             />
           ))
         ) : (

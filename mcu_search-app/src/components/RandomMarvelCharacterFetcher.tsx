@@ -19,8 +19,8 @@ const RandomMarvelCharacterFetcher: React.FC = () => {
   const fetchRandomMarvelCharacters = async () => {
     setLoading(true);
     const ts = Date.now();
-    const publicKey = "10a7b1e2e36a7af44b45b670370bb4b7";
-    const privateKey = "abde8a432425925a22eb7566fe09397a6fe7af8b";
+     const publicKey = import.meta.env.VITE_MCU_PUBLIC_API_KEY; // 環境変数から取得
+     const privateKey = import.meta.env.VITE_MCU_PRIVATE_API_KEY;
 
     const generateHash = (ts: number, privateKey: string, publicKey: string) => {
       return md5(`${ts}${privateKey}${publicKey}`).toString();
@@ -42,8 +42,9 @@ const RandomMarvelCharacterFetcher: React.FC = () => {
         characters = [...characters, ...filteredCharacters]; // 新しいキャラクターを追加
 
         // 重複を排除
-        // eslint-disable-next-line
-        characters = Array.from(new Set(characters.map((character) => character.id))).map((id) => characters.find((character) => character.id === id));
+        characters = Array.from(new Set(characters.map((character) => character.id)))
+          .map((id) => characters.find((character) => character.id === id))
+          .filter((character): character is MarvelCharacter => character !== undefined); // ここでundefinedを除外
       }
 
       setRandomCharacter(characters.slice(0, 15)); // 最終的に15枚に制限
@@ -65,19 +66,23 @@ const RandomMarvelCharacterFetcher: React.FC = () => {
 
   return (
     <div className="p-mv__content">
-      {randomCharacter.map((character: MarvelCharacter) => (
-        <Link
-          to={`/characters/${character.id}`}
-          key={character.id}
-          className="p-mv__item"
-        >
-          <img
-            src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-            alt={character.name}
-          />
-          <p className="character-name">{character.name}</p>
-        </Link>
-      ))}
+      {loading ? ( // loadingがtrueの場合はローディングメッセージを表示
+        <p>Loading...</p>
+      ) : (
+        randomCharacter.map((character: MarvelCharacter) => (
+          <Link
+            to={`/characters/${character.id}`}
+            key={character.id}
+            className="p-mv__item"
+          >
+            <img
+              src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+              alt={character.name}
+            />
+            <p className="character-name">{character.name}</p>
+          </Link>
+        ))
+      )}
     </div>
   );
 };

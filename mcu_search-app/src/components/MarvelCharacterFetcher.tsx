@@ -25,9 +25,6 @@ const MarvelCharacterFetcher: React.FC = () => {
     const publicKey = import.meta.env.VITE_MCU_PUBLIC_API_KEY;
     const privateKey = import.meta.env.VITE_MCU_PRIVATE_API_KEY;
 
-    console.log("Public API Key:", publicKey);
-    console.log("Private API Key:", privateKey);
-
     const generateHash = (ts: number, privateKey: string, publicKey: string) => {
       return md5(`${ts}${privateKey}${publicKey}`).toString();
     };
@@ -43,7 +40,6 @@ const MarvelCharacterFetcher: React.FC = () => {
         return path && !path.includes("image_not_available"); // ここをチェック
       });
 
-      setCharacters(filteredCharacters);
       navigate("/search", { state: { characters: filteredCharacters } });
     } catch (error) {
       if (axios.isAxiosError(error)) {
