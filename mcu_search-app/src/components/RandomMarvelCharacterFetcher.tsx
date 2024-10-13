@@ -31,9 +31,9 @@ const RandomMarvelCharacterFetcher: React.FC = () => {
 
     try {
       // 15枚のキャラクターが集まるまでループ
-      while (characters.length < 3) {
+      while (characters.length < 15) {
         const randomOffset = Math.floor(Math.random() * 1000);
-        const response = await axios.get(`${BASE_URL}?limit=10&offset=${randomOffset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`);
+        const response = await axios.get(`${BASE_URL}?limit=30&offset=${randomOffset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`);
         const filteredCharacters = response.data.data.results.filter((character: MarvelCharacter) => {
           const path = character.thumbnail.path;
           return path && !path.includes("image_not_available");
