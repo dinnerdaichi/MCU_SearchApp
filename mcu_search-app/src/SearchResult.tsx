@@ -4,15 +4,17 @@ import BackButton from "./components/BackButton";
 import { MarvelCharacter } from "./components/interfaces/MarvelCharacter";
 
 
-interface SearchResultProps {
-  characters?: MarvelCharacter[]; // charactersをオプショナルに
+// LocationStateインターフェースを定義
+interface LocationState {
+  characters?: MarvelCharacter[]; // charactersの型を定義
 }
 
-const SearchResult: React.FC<SearchResultProps> = () => {
+const SearchResult: React.FC<LocationState> = () => {
   const location = useLocation();
   const { characters } = location.state || {};
 
   const navigate = useNavigate();
+
   const handleBack = () => {
     navigate("/");
   };
