@@ -14,6 +14,7 @@ const App: React.FC = () => {
       <Route path="/characters/:id" element={<CharacterDetail />} />
       </Routes>
     </Router>
+
   );
 };
 

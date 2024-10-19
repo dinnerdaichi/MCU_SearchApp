@@ -3,8 +3,7 @@ import md5 from "crypto-js/md5";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MarvelCharacter } from "./interfaces/MarvelCharacter";
-
-
+import { Skeleton } from "@mui/material";
 
 const BASE_URL = "https://gateway.marvel.com/v1/public/characters";
 
@@ -19,8 +18,8 @@ const RandomMarvelCharacterFetcher: React.FC = () => {
   const fetchRandomMarvelCharacters = async () => {
     setLoading(true);
     const ts = Date.now();
-     const publicKey = import.meta.env.VITE_MCU_PUBLIC_API_KEY; // 環境変数から取得
-     const privateKey = import.meta.env.VITE_MCU_PRIVATE_API_KEY;
+    const publicKey = import.meta.env.VITE_MCU_PUBLIC_API_KEY; // 環境変数から取得
+    const privateKey = import.meta.env.VITE_MCU_PRIVATE_API_KEY;
 
     const generateHash = (ts: number, privateKey: string, publicKey: string) => {
       return md5(`${ts}${privateKey}${publicKey}`).toString();
@@ -64,10 +63,26 @@ const RandomMarvelCharacterFetcher: React.FC = () => {
     fetchRandomMarvelCharacters();
   }, []);
 
+
   return (
     <div className="p-mv__content">
-      {loading ? ( // loadingがtrueの場合はローディングメッセージを表示
-        <p>Loading...</p>
+      
+      {loading ? (
+        // Loading中はSkeletonを表示
+        <>
+          {[...Array(15)].map((_, index) => (
+            <div className="skeleton__wrap">
+              <Skeleton
+                key={index}
+                variant="rectangular"
+                width="100%"
+                height="100%"
+                style={{ backgroundColor: "lightgrey" }}
+                className="skeleton__item"
+              />
+            </div>
+          ))}
+        </>
       ) : (
         randomCharacter.map((character: MarvelCharacter) => (
           <Link
@@ -86,6 +101,5 @@ const RandomMarvelCharacterFetcher: React.FC = () => {
     </div>
   );
 };
-
 
 export default RandomMarvelCharacterFetcher;

@@ -9,8 +9,9 @@ const Front: React.FC = () => {
   // const [characters, setCharacters] = useState<MarvelCharacter[]>([]);
 
   return (
-    <div>
 
+
+    <div>
     <MarvelCharacterFetcher />
     <RandomMarvelCharacterFetcher />
     </div>

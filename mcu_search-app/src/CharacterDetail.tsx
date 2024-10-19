@@ -6,6 +6,7 @@ import CharacterInfo from "./components/CharacterInfo";
 import BackButton from "./components/BackButton";
 import { MarvelCharacter } from "./components/interfaces/MarvelCharacter";
 import MovieFetcher from "./components/MovieFetcher";
+import { Skeleton } from "@mui/material";
 
 
 
@@ -50,7 +51,11 @@ const CharacterDetail: React.FC = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>
+      <Skeleton variant="rectangular" width="100%" height="500px" />
+      <Skeleton variant="rectangular" width="100%" height="500px" />
+      <Skeleton variant="rectangular" width="100%" height="500px" />
+    </div>;
   }
 
   if (!character) {

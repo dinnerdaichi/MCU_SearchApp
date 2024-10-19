@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "@mui/material";
 
 interface SearchProps {
   setSearchTerm: (term: string) => void;
@@ -22,13 +23,14 @@ const Search: React.FC<SearchProps> = ({ setSearchTerm, onSearch }) => {
 
   return (
 
-    <div>
+    <div className="search__input">
       <input type="text"
-      placeholder="Search"
+      placeholder="find ur fav"
       value={inputValue}
       onChange={handleChange}
       />
-      <button onClick={handleSearch}>Search</button>
+      {/* <button onClick={handleSearch}>Search</button> */}
+      <Button variant="contained" onClick={handleSearch}>Search</Button>
     </div>
   )
 }

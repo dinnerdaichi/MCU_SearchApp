@@ -59,11 +59,15 @@ const MarvelCharacterFetcher: React.FC = () => {
   return (
     <>
       <h1>Marvel Characters</h1>
-      <Search
-        setSearchTerm={setSearchTerm}
-        onSearch={handleSearch}
-      />
-      {loading && <p>Loading...</p>}
+      <div className="search__flex">
+        <Search
+          setSearchTerm={setSearchTerm}
+          onSearch={handleSearch}
+        />
+        <div className="search__loading" style={{ width: "100px" }}>
+        {loading && <p>Loading...</p>}
+        </div>
+      </div>
     </>
   );
 };
