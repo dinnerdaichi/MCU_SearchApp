@@ -154,6 +154,19 @@
   box-sizing: border-box;
 
 }
+
+@media screen and (max-width: 768px) {
+
+  .inner{
+
+
+    padding: 0;
+
+
+  }
+
+}
+
 .detail__wrap{
 
 
@@ -166,6 +179,18 @@
   margin: 0 auto;
 
 }
+
+@media screen and (max-width: 768px) {
+  .detail__wrap img{
+
+    width: 100%;
+    margin-top: 50px;
+
+
+  }
+
+}
+
 
 .detail__content{
   text-align: left;
@@ -255,6 +280,18 @@ button{
   padding-left: 100px;
   margin-bottom: 10px;
 }
+
+@media screen and (max-width: 768px) {
+  .search__flex{
+
+    justify-content: center;
+    padding-left: 0px;
+    flex-direction: column;
+
+
+}
+}
+
 
 .search__loading{
   margin: 0;
